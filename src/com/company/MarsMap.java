@@ -1,5 +1,7 @@
 package com.company;
 
+import com.company.Robot.Robot;
+
 import java.util.ArrayList;
 
 /**
@@ -22,22 +24,36 @@ public class MarsMap {
         robots.add(robot);
     }
 
-    public void addScentPos(int x,int y){
-        int[] position = new int[]{x,y};
-        if(!scentPositions.contains(position)){
-            scentPositions.add(position);
-        }
+
+    public ArrayList<int[]> getScentPositions() {
+        return scentPositions;
     }
 
+    public void setScentPositions(ArrayList<int[]> scentPositions) {
+        this.scentPositions = scentPositions;
+    }
 
-    public boolean isOffPos(int x,int y){
-        if(x < x_max && y < y_max){
-            return false;
+    /**
+     * Checks if arguement x,y coordinate is off map
+     * @param x - X Coordinate
+     * @param y - Y Coordinate
+     * @return
+     */
+    public boolean isOffPos(int x, int y){
+        //Check if it is off the map
+        if(x > x_max || x < 0 || y > y_max || y < 0){
+            return true;
         }else{
             return false;
         }
     }
 
+    /**
+     * Checks if coordinate matches any scent coordinates
+     * @param x - X Coordinate
+     * @param y - Y Coordinate
+     * @return boolean - true if is scent, false if not scent
+     */
     public boolean isScentPosition(int x,int y){
         for (int[] position:scentPositions){
             int x_scent = position[0];
